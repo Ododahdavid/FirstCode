@@ -6,4 +6,4 @@ const TutorSignUpFormPage = () => {
   )
 }
 
-export default TutorSignUpFormPage;
+export default TutorSignUpFormPage
