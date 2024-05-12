@@ -1,0 +1,33 @@
+import React from 'react'
+import { Link as RouteLink } from "react-router-dom"
+
+
+
+const SignUpQuestionPage = () => {
+  return (
+    <>
+        <h1 className={"SignUp-Question"}>You are Signing up as?</h1>
+
+        <div className={"SignUp-OptionsContainer"}>
+
+            <RouteLink  className={"Student-SignUpOption"} to={"/studentSignUpFormPage"}>
+
+                <div className={"StudentSignUpOption-Image"}></div>
+                <h3>Sign Up as a <span>Student</span></h3>
+
+                
+            </RouteLink>
+            
+            <div className={"Tutor-SignUpOption"}>
+
+                <div className={"TutorSignUpOption-Image"}></div>
+                <h3>Sign Up as a <span>Tutor</span></h3>
+
+            </div>
+
+        </div>
+    </>
+  )
+}
+
+export default SignUpQuestionPage

@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react"
+import "./CSS/styles.css"
+import "./CSS/PageLoader.css"
+import "./CSS/ButonLoader.css"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Footer from "./GeneralComponents/Footer";
+import Loader from "./Loader/Loader.jsx"
+
+// Lazy imports
+const HomePage = React.lazy(() => import("./Pages/HomePage"))
+const StudentDashboard = React.lazy(()=> import("./Pages/StudentDashboard"))
+const TutorDashboard = React.lazy(()=> import("./Pages/TutorDashboard"))
+const SignUpQuestionPage = React.lazy(() => import("./Pages/SignUpQuestionPage"))
+const StudentSignUpFormPage = React.lazy(()=> import("./Pages/StudentSignUpFormPage"))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Suspense fallback={<Loader />}>
+
+          <Routes>
+            <Route path="/studentDashboard" element={<StudentDashboard />} />
+            <Route path="/tutorDashboard" element={<TutorDashboard />} />
+            <Route path="/signupQuestionPage" element={<SignUpQuestionPage />} />
+            <Route path="/studentSignUpFormPage" element={<StudentSignUpFormPage />} />
+            <Route path="/*" element={<HomePage />} />
+          </Routes>
+        <Footer />
+        </Suspense>
+      </Router>
+    </>
   );
 }
 

@@ -1,0 +1,605 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  /* outline: dashed 1px red; */
+  font-family: "Poppins", sans-serif;
+  /* font-weight: 400; */
+  font-style: normal;
+}
+.OrangeKeyword{
+  color: rgb(255, 153, 0);
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+.HomePage-navbar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 9;
+  background-color: white;
+  padding: 20px;
+}
+.HomePage-navbar .logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
+}
+.HomePage-navbar ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.HomePage-navbar ul li{
+  cursor: pointer;
+  user-select: none;
+}
+
+.HomePage-navbar ul li:hover{
+  border-bottom: solid 2px rgb(255, 153, 0);
+
+}
+.login-signup{
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.login-signup button{
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 30px;
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Home-header {
+  width: 100%;
+  height: 90dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: radial-gradient(#6f707b 0.65px, #e5e5f7 0.65px);
+  background-size: 13px 13px;
+  position: relative;
+}
+.Home-HeaderContext-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding-left: 50px;
+}
+.Home-HeaderImage {
+  width: 50%;
+  height: 100%;
+  background-image: url("../SrcImages/Programmer.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Home-HeaderContext-wrapper {
+  max-width: 600px;
+  height: fit-content;
+}
+.Home-HeaderContext-wrapper h1 {
+  font-size: 80px;
+  color: rgb(255, 153, 0);
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+.Home-HeaderContext-wrapper span {
+  color: blue;
+  font-weight: bolder;
+}
+.Home-HeaderContext-wrapper p {
+  font-size: 20px;
+  color: #000000;
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.Header-rotatingReact{
+  position: absolute;
+  top: 18%;
+  right: 90%;
+  animation: infinite rotatingElements 5s;
+}
+
+@keyframes rotatingElements {
+  0%{
+    transform: rotate(0deg);
+  }
+  50%{
+    transform: rotate(270deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+.Header-floatingPython{
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  /* animation: floatingElements 2s infinite ease-in-out; */
+}
+@keyframes floatingElements {
+  0%{
+    transform: translateY(0px);
+  }
+  50%{
+    transform: translateY(20px);
+  }
+
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+.Header-floatingNodeJs{
+  position: absolute;
+  top: 75%;
+  left: 5%;
+  /* animation: floatingElements 2s infinite ease-in-out; */
+}
+/* About section */
+.AboutUs-section{
+  width: 100%;
+  height: 70vh;
+  background-color: #fff;
+  margin-top: 60px;
+}
+.AboutUs-section h1{
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  color: blue;
+  font-size: 40px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.AboutUs-section h1::after{
+  content: "";
+  width: 100px;
+  height: 20px;
+  background-color: rgb(255, 153, 0);
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 30px;
+  right: 50%;
+}
+.AboutUs-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+}
+.AboutUs-img{
+  width: 40%;
+  height: 100%;
+
+}
+.AboutUs-Content{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AboutUs-Content p span{
+  color: blue;
+  font-weight: bolder;
+  font-size: x-large;
+}
+.AboutUs-Content p{
+  font-size: 15px;
+  color: #000000;
+  font-weight: 400;
+  width: 600px;
+}
+
+/* How it works section */
+.HowItWorks-section{
+  width: 100%;
+  height: 70vh;
+  background-color: #e5e5f7;
+  margin-top: 60px;
+}
+.HowItWorks-section h1{
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  color: blue;
+  font-size: 40px;
+  font-weight: 800;
+  position: relative;
+  z-index: 2;
+}
+.HowItWorks-section h1::after{
+  content: "";
+  width: 150px;
+  height: 20px;
+  background-color: rgb(255, 153, 0);
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 35px;
+  right: 50%;
+}
+.HowItWorks-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 40px;
+}
+.HowItWorks-img{
+  width: 40%;
+  height: 100%;
+
+}
+.AboutUs-Content{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.HowItWorks-Content p span:nth-of-type(1){
+  color: blue;
+  font-weight: bolder;
+  font-size: x-large;
+}
+.HowItWorks-Content p span{
+  color: rgb(255, 153, 0);
+  font-weight: bolder;
+  font-size: large;
+}
+.HowItWorks-Content p{
+  font-size: 15px;
+  color: #000000;
+  font-weight: 400;
+  width: 500px;
+}
+/* Contact-Us section */
+.ContactUs-section{
+  width: 100%;
+  height: 70vh;
+  background-color: #fff;
+  margin-top: 80px;
+}
+.ContactUs-section h1{
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  color: blue;
+  font-size: 40px;
+  font-weight: 800;
+  position: relative;
+  z-index: 2;
+}
+.ContactUs-section h1::after{
+  content: "";
+  width: 150px;
+  height: 20px;
+  background-color: rgb(255, 153, 0);
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: 35px;
+  right: 48%;
+}
+.ContactUs-Container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  gap: 40px;
+}
+.ContactUs-Image{
+  width: 40%;
+  height: 100%;
+}
+.ContactUs-form-container{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+}
+.ContactUs-form-container form{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5f7;
+}
+.ContactUs-form-container form label{
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.ContactUs-form-container form input{
+  min-width: 300px;
+  height: 30px;
+  padding: 8px 8px;
+}
+.ContactUs-form-container form textarea{
+  min-width: 300px;
+  height: 150px;
+  padding: 10px;
+}
+.ContactUs-form-container form button{
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background-color: blue;
+  color: #fff;
+  margin-top: 10px;
+  cursor: pointer;
+}
+/* Footer styling */
+footer{
+  width: 100%;
+  height: 50vh;
+  background-color: #e5e5f7;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+/* Sign up Option Choosing pagr styling */
+.SignUp-Question{
+  width: 100%;
+  height: 90px;
+  display: flex;justify-content: center;
+  align-items: center;
+  background-color: #e5e5f7;
+  color: blue;
+  font-weight: bolder;
+  font-size: 40px;
+}
+.SignUp-OptionsContainer{
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding: 30px;
+  /* flex-wrap: wrap; */
+}
+.Student-SignUpOption{
+  width: 40%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  outline: solid 1px black;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: .3s ease-out;
+}
+.Student-SignUpOption:hover{
+  background-color: #e5e5f7;
+  transform: scale(1.1);
+  transition: .3s ease-out;
+}
+.StudentSignUpOption-Image{
+  width: 65%;
+  height: 400px;
+  background-image: url("../SrcImages/StudentSignUpPic-removebg-preview.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.Student-SignUpOption h3{
+  color: blue;
+  font-weight: bold;
+  font-size: 30px;
+}
+.Student-SignUpOption h3 span{
+  color: rgb(255, 153, 0);
+}
+/* Tutor Option styling */
+.Tutor-SignUpOption{
+  width: 40%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  outline: solid 1px black;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: .3s ease-out;
+}
+.Tutor-SignUpOption:hover{
+  background-color: #e5e5f7;
+  transform: scale(1.1);
+  transition: .3s ease-out;
+}
+.TutorSignUpOption-Image{
+  width: 65%;
+  height: 400px;
+  background-image: url("../SrcImages/TutorSignUpPic-removebg-preview.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.Tutor-SignUpOption h3{
+  color: blue;
+  font-weight: bold;
+  font-size: 30px;
+}
+.Tutor-SignUpOption h3 span{
+  color: rgb(255, 153, 0);
+}
+
+/* Student Sign Up form */
+.StudentSignUpformSection{
+  width: 100%;
+  height: 100vh;
+  display: flex;justify-content: center;
+  align-items: center;
+}
+.StudentSignUpForm-image-container{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+}
+.StudentSignUpForm-image{
+  width: 80%;
+  height: 60%;
+  background-image: url("../SrcImages/undraw_fill_form_re_cwyf-removebg-preview.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.StudentSignUpForm-Container{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.Formlogo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
+}
+.StudentSignUpForm-Container form{
+  width: 60%;
+  height: 65%;
+  background-color: #fff;
+  outline: solid 1px black;
+  padding: 20px;
+}
+.StudentSignUpForm-Container form label{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.StudentSignUpForm-Container form label input{
+  min-width: 300px;
+  height: 30px;
+  padding: 8px 8px;
+}
+.StudentSignUpForm-Container form label select{
+  min-width: 300px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sign-upButtonContainer{
+  width: 100;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.StudentSignUpForm-Container form button{
+  width: 130px;
+  height: 40px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background-color: blue;
+  color: #fff;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.passwordStrengthContainer{
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.passwordIndicator{
+  width: 60px;
+  height: 7px;
+  outline: solid 1px black;
+  border-radius: 10px;
+}
+.passwordStrengthAlert{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border-radius: 0px;
+  gap: 6px;
+}
