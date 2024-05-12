@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link as RouteLink } from "react-router-dom"
 // npm install react-scroll
 // import it as link

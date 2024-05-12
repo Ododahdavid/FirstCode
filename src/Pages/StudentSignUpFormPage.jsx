@@ -143,6 +143,8 @@ const StudentSignUpFormPage = () => {
       
     } else if (!PasswordStrengthValidator()){
       toast.error("Password is too weak")
+      setSubmitClick(false);
+
      }
     
     else {

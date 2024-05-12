@@ -49,7 +49,7 @@ const ContactUs = () => {
   const contactUsEmailValidator = () => {
     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    const { fullname, email, message } = contactUs;
+    const {email} = contactUs;
 
     // Validating email field and value
     if (!emailRegex.test(email)) {
