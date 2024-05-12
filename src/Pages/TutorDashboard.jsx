@@ -5,7 +5,7 @@ const TutorDashboard = () => {
   return (
     <>
       <Helmet>
-        <title>Student Dashboard</title>
+        <title>Tutor Dashboard</title>
       </Helmet>
 
       <h1>Tutor's Dashboard</h1>

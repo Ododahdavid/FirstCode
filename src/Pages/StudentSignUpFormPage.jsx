@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 // importing toast to enable status notification
 import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../Loader/ButtonLoader";
-
+import { Helmet } from "react-helmet";
 
 // Note: THE DOCUMENTATION IN THIS FILE IS ALSO APPLICABLE TO THE TutorSignInForm Component... so please read it properly, so you will not stress me 😊
 
@@ -24,7 +24,7 @@ const StudentSignUpFormPage = () => {
 
   const navigate = useNavigate();
 
-// This useEffect function is responsible for navigating the user to their dashboard after the form has been submitted successfully
+  // This useEffect function is responsible for navigating the user to their dashboard after the form has been submitted successfully
   useEffect(() => {
     if (formSubmitted) {
       setTimeout(() => {
@@ -32,7 +32,6 @@ const StudentSignUpFormPage = () => {
       }, 2000);
     }
   }, [formSubmitted, navigate]);
-
 
   // This function is responsible for getting the values of the different input fields in the form, and sending it to the variable studentDetails above
   const handleInputValueChange = (event) => {
@@ -49,7 +48,6 @@ const StudentSignUpFormPage = () => {
     StudentSignUpFormButton.current.disabled = true; //disabling the form button
   };
 
-
   // This function is called when the form is being submitted, it calls the different functions i set for validating Input Data, and if true, the following commands beneath it will execute
   const studentFormSubmitProcess = (event) => {
     event.preventDefault();
@@ -62,9 +60,11 @@ const StudentSignUpFormPage = () => {
     ) {
       setTimeout(() => {
         setSubmitClick(false);
-        toast.success("Form Submitted Successfully", {style: {
-          background: "rgb(144, 234, 96)"
-        }});
+        toast.success("Form Submitted Successfully", {
+          style: {
+            background: "rgb(144, 234, 96)",
+          },
+        });
         setStudentDetails({
           firstname: "",
           lastname: "",
@@ -78,10 +78,13 @@ const StudentSignUpFormPage = () => {
       }, 2000);
     } else if (!PasswordStrengthValidator()) {
       // toast styling
-      toast.error("Password is too weak", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
-      setTimeout(() => { // Use setTimeout to ensure it's executed after the timeout
+      toast.error("Password is too weak", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
+      setTimeout(() => {
+        // Use setTimeout to ensure it's executed after the timeout
         setSubmitClick(false); // Re-enable the button
         StudentSignUpFormButton.current.disabled = false; // Re-enable the button
       }, 1000);
@@ -107,9 +110,11 @@ const StudentSignUpFormPage = () => {
       experiencelevel === "" ||
       password === ""
     ) {
-      toast.error("Please fill all the fields", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
+      toast.error("Please fill all the fields", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
       return false;
     } else {
       return true;
@@ -121,9 +126,11 @@ const StudentSignUpFormPage = () => {
     const stringOnlyRegex = /^[A-Za-z\s]+$/;
 
     if (!stringOnlyRegex.test(firstname) || !stringOnlyRegex.test(lastname)) {
-      toast.error("Please Enter a Valid Name", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
+      toast.error("Please Enter a Valid Name", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
       return false;
     } else {
       return true;
@@ -135,9 +142,11 @@ const StudentSignUpFormPage = () => {
     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!emailRegex.test(email)) {
-      toast.error("Please Enter a Valid Email", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
+      toast.error("Please Enter a Valid Email", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
       return false;
     } else {
       return true;
@@ -171,6 +180,10 @@ const StudentSignUpFormPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>FirstCode | Student sign up form</title>
+      </Helmet>
+      
       <section className="StudentSignUpformSection">
         <div className={"StudentSignUpForm-image-container"}>
           <div className={"StudentSignUpForm-image"}></div>
@@ -314,7 +327,7 @@ const StudentSignUpFormPage = () => {
                 ref={StudentSignUpFormButton}
                 type="submit"
                 onClick={handleSubmitClick}
-                disabled={SubmitClick} 
+                disabled={SubmitClick}
               >
                 {SubmitClick ? <ButtonLoader /> : "Submit"}
               </button>

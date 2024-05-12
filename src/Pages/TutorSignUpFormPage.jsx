@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../Loader/ButtonLoader";
+import { Helmet } from "react-helmet";
 
 const TutorSignUpFormPage = () => {
-
   const [TutorDetails, setTutorDetails] = useState({
     firstname: "",
     lastname: "",
@@ -15,7 +15,6 @@ const TutorSignUpFormPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [SubmitClick, setSubmitClick] = useState(false);
   const navigate = useNavigate();
-
 
   useEffect(() => {
     if (formSubmitted) {
@@ -49,9 +48,11 @@ const TutorSignUpFormPage = () => {
     ) {
       setTimeout(() => {
         setSubmitClick(false);
-        toast.success("Form Submitted Successfully", {style: {
-          background: "rgb(144, 234, 96)"
-        }});
+        toast.success("Form Submitted Successfully", {
+          style: {
+            background: "rgb(144, 234, 96)",
+          },
+        });
         setTutorDetails({
           firstname: "",
           lastname: "",
@@ -65,10 +66,13 @@ const TutorSignUpFormPage = () => {
       }, 2000);
     } else if (!PasswordStrengthValidator()) {
       // toast styling
-      toast.error("Password is too weak", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
-      setTimeout(() => { // Use setTimeout to ensure it's executed after the timeout
+      toast.error("Password is too weak", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
+      setTimeout(() => {
+        // Use setTimeout to ensure it's executed after the timeout
         setSubmitClick(false); // Re-enable the button
         TutorSignUpFormButton.current.disabled = false; // Re-enable the button
       }, 1000);
@@ -94,9 +98,11 @@ const TutorSignUpFormPage = () => {
       experiencelevel === "" ||
       password === ""
     ) {
-      toast.error("Please fill all the fields", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
+      toast.error("Please fill all the fields", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
       return false;
     } else {
       return true;
@@ -108,9 +114,11 @@ const TutorSignUpFormPage = () => {
     const stringOnlyRegex = /^[A-Za-z\s]+$/;
 
     if (!stringOnlyRegex.test(firstname) || !stringOnlyRegex.test(lastname)) {
-      toast.error("Please Enter a Valid Name", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
+      toast.error("Please Enter a Valid Name", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
       return false;
     } else {
       return true;
@@ -122,9 +130,11 @@ const TutorSignUpFormPage = () => {
     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!emailRegex.test(email)) {
-      toast.error("Please Enter a Valid Email", {style: {
-        background: "rgb(240, 139, 156)"
-      }});
+      toast.error("Please Enter a Valid Email", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
       return false;
     } else {
       return true;
@@ -158,6 +168,9 @@ const TutorSignUpFormPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>FirstCode | Tutor Sign Up Form</title>
+      </Helmet>
       <section className="StudentSignUpformSection">
         <div className={"StudentSignUpForm-image-container"}>
           <div className={"TutorSignUpForm-image"}></div>
@@ -301,7 +314,7 @@ const TutorSignUpFormPage = () => {
                 ref={TutorSignUpFormButton}
                 type="submit"
                 onClick={handleSubmitClick}
-                disabled={SubmitClick} 
+                disabled={SubmitClick}
               >
                 {SubmitClick ? <ButtonLoader /> : "Submit"}
               </button>
@@ -313,7 +326,7 @@ const TutorSignUpFormPage = () => {
         <Toaster position="top-center" reverseOrder={false} />
       </section>
     </>
-  )
-}
+  );
+};
 
-export default TutorSignUpFormPage
+export default TutorSignUpFormPage;

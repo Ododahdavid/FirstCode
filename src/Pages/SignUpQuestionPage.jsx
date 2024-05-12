@@ -1,11 +1,22 @@
 import React from 'react'
 import { Link as RouteLink } from "react-router-dom"
+import { Helmet } from "react-helmet";
+
 
 
 
 const SignUpQuestionPage = () => {
   return (
     <>
+
+      <Helmet>
+        <title>FirstCode | SignUp Options</title>
+      </Helmet>
+      
+
+      {/* Helmet section */}
+
+
         <h1 className={"SignUp-Question"}>You are Signing up as?</h1>
 
         <div className={"SignUp-OptionsContainer"}>
