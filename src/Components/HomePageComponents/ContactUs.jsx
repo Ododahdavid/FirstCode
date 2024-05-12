@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import FeedBackImg from "../../SrcImages/feedBack.png";
 // importing toast, and toaster from react hot toast, to display status messages
 import toast, { Toaster } from "react-hot-toast";
@@ -11,6 +11,8 @@ const ContactUs = () => {
     email: "",
     message: "",
   });
+
+  const ContactUsFormButton = useRef(null);
 
   // states for fullname and email verification
   const [fullnameValid, setFullnameValid] = useState(true);
@@ -30,14 +32,18 @@ const ContactUs = () => {
     const { fullname, email, message } = contactUs;
 
     if (fullname === "" || email === "" || message === "") {
-      toast.error("All fields are required");
+      toast.error("All fields are required", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
       return false;
     }
 
     // Validating fullname field and value
     if (!stringOnlyRegex.test(fullname)) {
       setFullnameValid(false);
-      toast.error("Please enter a valid name");
+      toast.error("Please enter a valid name", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
       return false;
     } else {
       setFullnameValid(true);
@@ -54,7 +60,9 @@ const ContactUs = () => {
     // Validating email field and value
     if (!emailRegex.test(email)) {
       setEmailValid(false);
-      toast.error("Please enter a valid email address");
+      toast.error("Please enter a valid email address", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
       return false;
     } else {
       setEmailValid(true);
@@ -69,6 +77,7 @@ const ContactUs = () => {
     event.preventDefault();
     setSubmitClick(true);
     onSubmit(event);
+    ContactUsFormButton.current.disabled = true;
   };
 
   // Functin that handles Submitting process
@@ -76,7 +85,9 @@ const ContactUs = () => {
     event.preventDefault();
     if (contactUsEmailValidator() && contactUsFullNameValidator()) {
         setTimeout(()=>{
-            toast.success("Message sent Successfully");
+            toast.success("Message sent Successfully", {style: {
+              background: "rgb(144, 234, 96)"
+            }});
             console.log(contactUs);
             setContactUs({
               fullname: "",
@@ -84,13 +95,17 @@ const ContactUs = () => {
               message: "",
         })
         setSubmitClick(false);
+        ContactUsFormButton.current.disabled = false;
       }, 2000);
       setSubmitClick(true);
 
     } else {
         setTimeout(()=>{
-            toast.error("Invalid input");
+            toast.error("Invalid input", {style: {
+              background: "rgb(240, 139, 156)"
+            }});
             setSubmitClick(false);
+            ContactUsFormButton.current.disabled = false;
             return false;
         }, 2000)
     }
@@ -156,7 +171,7 @@ const ContactUs = () => {
                 ></textarea>
               </label>
 
-              <button type="submit" onClick={handleSubmitClick}>
+              <button type="submit" ref={ContactUsFormButton} onClick={handleSubmitClick}>
               {
                   SubmitClick
                    ? <ButtonLoader/>

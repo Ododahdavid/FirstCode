@@ -1,131 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// importing toast, and toaster from react hot toast, to display status messages
-import toast, { Toaster } from 'react-hot-toast';
+// importing toast to enable status notification
+import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../Loader/ButtonLoader";
 
+
+// Note: THE DOCUMENTATION IN THIS FILE IS ALSO APPLICABLE TO THE TutorSignInForm Component... so please read it properly, so you will not stress me 😊
+
+// destructuring the expected values of the form using a usestate called StudentDetails
 const StudentSignUpFormPage = () => {
   const [studentDetails, setStudentDetails] = useState({
     firstname: "",
     lastname: "",
     email: "",
     experiencelevel: "",
-    password: ""
+    password: "",
   });
 
-// Here i am destructing a variable formSubmitted, to know when the form has been submitted, for the purpose of navigation... if the form has been succesfully submitted, the user should be navigated tothe student dashboard
+  // Here i am destructing a variable formSubmitted, to know when the form has been submitted, for the purpose of navigation... if the form has been succesfully submitted, the user should be navigated tothe student dashboard
   const [formSubmitted, setFormSubmitted] = useState(false);
+  // Here i am destructuringsubmitClicked, to know when the button has been clicked, so the loader i designed would come in place of the string "Submit" depending on the boolean value of the variable
+  const [SubmitClick, setSubmitClick] = useState(false);
 
-//   using ReactHook useNavigate
   const navigate = useNavigate();
 
-//   This useEffect hook is watching to know if the form has been submitted, so it can navigate the user to the student dashboard
+// This useEffect function is responsible for navigating the user to their dashboard after the form has been submitted successfully
   useEffect(() => {
     if (formSubmitted) {
-      setTimeout(()=>{
+      setTimeout(() => {
         navigate("/studentDashboard");
-      }, 3000)
+      }, 2000);
     }
   }, [formSubmitted, navigate]);
 
-  // Function to handle Input value Change
+
+  // This function is responsible for getting the values of the different input fields in the form, and sending it to the variable studentDetails above
   const handleInputValueChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     setStudentDetails({ ...studentDetails, [name]: value });
   };
 
-  // Validation functions
-  const studentDetailsValidation = () => {
-    // deconstructing the student details for validation
-    const { firstname, lastname, email, experiencelevel, password } =
-      studentDetails;
-
-    if (
-      firstname === "" ||
-      lastname === "" ||
-      email === "" ||
-      experiencelevel === "" ||
-      password === ""
-    ) {
-      // example of toast message, for errors i use toast.error
-      toast.error("Please fill all the fields");
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const studentNameValidation = () => {
-    // deconstructing the student details for validation
-    const { firstname, lastname } = studentDetails;
-    const stringOnlyRegex = /^[A-Za-z\s]+$/;
-
-    if (!stringOnlyRegex.test(firstname) || !stringOnlyRegex.test(lastname)) {
-      toast.error("Please Enter a Valid Name");
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const studentEmailValidation = () => {
-    // deconstructing the student details for validation
-    const { email } = studentDetails;
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!emailRegex.test(email)) {
-      toast.error("Please Enter a Valid Email");
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  // Function to Validate Password strength
-  const [passwordStrength, setPasswordStrength] = useState("");
-
-  const PasswordStrengthValidator = () => {
-    
-    const { password } = studentDetails;
-
-    if (password.trim().length <= 3) {
-      setPasswordStrength("Too Weak");
-      return false;
-    } else if (password.trim().length > 3 && password.trim().length <= 6) {
-      setPasswordStrength("Weak");
-      return false;
-    } else if (password.trim().length > 6 && password.trim().length <= 8) {
-      setPasswordStrength("Good");
-      return true
-    } else if (password.trim().length > 8) {
-      setPasswordStrength("Strong");
-      return true
-    }
-  };
-
-  // Function to handle password input value change
-  const handlePasswordChange = (event) => {
-    handleInputValueChange(event);
-    PasswordStrengthValidator(event);
-  };
-
-  // function to handle submission process
-  const studentFormSubmitProcess = async (event) => {
+  // This function takes note of when the form button is clicked, and cals the various functions in there, ad it also disables the button, so as to prevent users from clicking on the button again, while its processing
+  const handleSubmitClick = (event) => {
+    setSubmitClick(true);
     event.preventDefault();
+    studentFormSubmitProcess(event);
+    StudentSignUpFormButton.current.disabled = true; //disabling the form button
+  };
 
- 
+
+  // This function is called when the form is being submitted, it calls the different functions i set for validating Input Data, and if true, the following commands beneath it will execute
+  const studentFormSubmitProcess = (event) => {
+    event.preventDefault();
 
     if (
       studentDetailsValidation() &&
       studentNameValidation() &&
-      studentEmailValidation()&&
+      studentEmailValidation() &&
       PasswordStrengthValidator()
-      
     ) {
-      setTimeout(()=>{
+      setTimeout(() => {
         setSubmitClick(false);
-        toast.success("Form Submitted Successfully");
+        toast.success("Form Submitted Successfully", {style: {
+          background: "rgb(144, 234, 96)"
+        }});
         setStudentDetails({
           firstname: "",
           lastname: "",
@@ -136,42 +75,99 @@ const StudentSignUpFormPage = () => {
         setFormSubmitted(true);
         setPasswordStrength("");
         console.table(studentDetails);
-        return true;
-      }, 2000)
-      
-      setSubmitClick(true);
-      
-    } else if (!PasswordStrengthValidator()){
-      toast.error("Password is too weak")
-      setSubmitClick(false);
-
-     }
-    
-    else {
-      // toast.error("Invalid Inputs");
-      setTimeout(()=>{
+      }, 2000);
+    } else if (!PasswordStrengthValidator()) {
+      // toast styling
+      toast.error("Password is too weak", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
+      setTimeout(() => { // Use setTimeout to ensure it's executed after the timeout
+        setSubmitClick(false); // Re-enable the button
+        StudentSignUpFormButton.current.disabled = false; // Re-enable the button
+      }, 1000);
+    } else {
+      setTimeout(() => {
         setSubmitClick(false);
-        return false;
-      }, 2000)
+      }, 2000);
     }
-
-  
-    
+    StudentSignUpFormButton.current.disabled = false;
   };
 
-  // I did this to add my Button loader when the button is clicked, SubmitClick is then set to true
-  const [SubmitClick, setSubmitClick] = useState(false);
+  const StudentSignUpFormButton = useRef(null); //I used the hook useRef to capture the form button... you suppose sabi this one na
 
-  const handleSubmitClick = (event) => {
-    event.preventDefault();
-    setSubmitClick(true);
-    studentFormSubmitProcess(event);
+  // Validation functions
+  const studentDetailsValidation = () => {
+    const { firstname, lastname, email, experiencelevel, password } =
+      studentDetails;
+
+    if (
+      firstname === "" ||
+      lastname === "" ||
+      email === "" ||
+      experiencelevel === "" ||
+      password === ""
+    ) {
+      toast.error("Please fill all the fields", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
+      return false;
+    } else {
+      return true;
+    }
   };
 
+  const studentNameValidation = () => {
+    const { firstname, lastname } = studentDetails;
+    const stringOnlyRegex = /^[A-Za-z\s]+$/;
 
+    if (!stringOnlyRegex.test(firstname) || !stringOnlyRegex.test(lastname)) {
+      toast.error("Please Enter a Valid Name", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
+      return false;
+    } else {
+      return true;
+    }
+  };
 
+  const studentEmailValidation = () => {
+    const { email } = studentDetails;
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+    if (!emailRegex.test(email)) {
+      toast.error("Please Enter a Valid Email", {style: {
+        background: "rgb(240, 139, 156)"
+      }});
+      return false;
+    } else {
+      return true;
+    }
+  };
 
+  const [passwordStrength, setPasswordStrength] = useState("");
+
+  const PasswordStrengthValidator = () => {
+    const { password } = studentDetails;
+
+    if (password.trim().length <= 3) {
+      setPasswordStrength("Too Weak");
+      return false;
+    } else if (password.trim().length > 3 && password.trim().length <= 6) {
+      setPasswordStrength("Weak");
+      return false;
+    } else if (password.trim().length > 6 && password.trim().length <= 8) {
+      setPasswordStrength("Good");
+      return true;
+    } else if (password.trim().length > 8) {
+      setPasswordStrength("Strong");
+      return true;
+    }
+  };
+
+  const handlePasswordChange = (event) => {
+    handleInputValueChange(event);
+    PasswordStrengthValidator(event);
+  };
 
   return (
     <>
@@ -268,7 +264,6 @@ const StudentSignUpFormPage = () => {
                   className={"passwordIndicator"}
                   style={{
                     backgroundColor:
-                      //   passwordStrength === "Too Weak" ? "red" : "transparent",
                       passwordStrength === "Too Weak" ||
                       passwordStrength === "Weak" ||
                       passwordStrength === "Good" ||
@@ -315,21 +310,20 @@ const StudentSignUpFormPage = () => {
             </label>
 
             <div className={"sign-upButtonContainer"}>
-              <button type="submit" onClick={handleSubmitClick}>
-                {
-                  SubmitClick
-                   ? <ButtonLoader/>
-                    : "Submit"
-                }
+              <button
+                ref={StudentSignUpFormButton}
+                type="submit"
+                onClick={handleSubmitClick}
+                disabled={SubmitClick} 
+              >
+                {SubmitClick ? <ButtonLoader /> : "Submit"}
               </button>
             </div>
           </form>
         </div>
 
         {/* Adding the toaster styling here */}
-        <Toaster   position="top-center" reverseOrder={false} />
-
-        
+        <Toaster position="top-center" reverseOrder={false} />
       </section>
     </>
   );

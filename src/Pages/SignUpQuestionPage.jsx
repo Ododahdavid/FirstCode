@@ -18,12 +18,12 @@ const SignUpQuestionPage = () => {
                 
             </RouteLink>
             
-            <div className={"Tutor-SignUpOption"}>
+            <RouteLink className={"Tutor-SignUpOption"} to={"/tutorSignUpFormPage"}>
 
                 <div className={"TutorSignUpOption-Image"}></div>
                 <h3>Sign Up as a <span>Tutor</span></h3>
 
-            </div>
+            </RouteLink>
 
         </div>
     </>
