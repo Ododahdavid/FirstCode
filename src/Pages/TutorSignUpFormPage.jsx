@@ -1,17 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../Loader/ButtonLoader";
 import { Helmet } from "react-helmet";
+import { AppContext } from "../GeneralComponents/ContextApi";
 
 const TutorSignUpFormPage = () => {
-  const [TutorDetails, setTutorDetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    experiencelevel: "",
-    password: "",
-  });
+
+  // i want to make the details from this tutor form available to all components, so i will be moving the below commented code, to the context API page. and i will destructure it here
+
+
+  // const [TutorDetails, setTutorDetails] = useState({
+  //   firstname: "",
+  //   lastname: "",
+  //   email: "",
+  //   experiencelevel: "",
+  //   password: "",
+  // });
+
+  // Destructuring the tutors form state from the context API page
+  const {TutorDetails, setTutorDetails} = useContext(AppContext)
+ 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [SubmitClick, setSubmitClick] = useState(false);
   const navigate = useNavigate();
@@ -19,7 +28,7 @@ const TutorSignUpFormPage = () => {
   useEffect(() => {
     if (formSubmitted) {
       setTimeout(() => {
-        navigate("/tutorDashboard");
+        navigate("/tutordashboard");
       }, 3000);
     }
   }, [formSubmitted, navigate]);

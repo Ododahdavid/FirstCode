@@ -67,7 +67,7 @@ const Navbar = () => {
          <button className="login">Login</button>
          </RouteLink>
 
-        <RouteLink to={"/signupQuestionPage"}>
+        <RouteLink to={"/signupquestionpage"}>
           <button className="signup">Sign Up</button>
           </RouteLink>
         </div>

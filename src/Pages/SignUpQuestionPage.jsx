@@ -21,7 +21,7 @@ const SignUpQuestionPage = () => {
 
         <div className={"SignUp-OptionsContainer"}>
 
-            <RouteLink  className={"Student-SignUpOption"} to={"/studentSignUpFormPage"}>
+            <RouteLink  className={"Student-SignUpOption"} to={"/studentsignupformpage"}>
 
                 <div className={"StudentSignUpOption-Image"}></div>
                 <h3>Sign Up as a <span>Student</span></h3>
@@ -29,7 +29,7 @@ const SignUpQuestionPage = () => {
                 
             </RouteLink>
             
-            <RouteLink className={"Tutor-SignUpOption"} to={"/tutorSignUpFormPage"}>
+            <RouteLink className={"Tutor-SignUpOption"} to={"/tutorsignupformpage"}>
 
                 <div className={"TutorSignUpOption-Image"}></div>
                 <h3>Sign Up as a <span>Tutor</span></h3>

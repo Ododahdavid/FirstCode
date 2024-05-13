@@ -1,21 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // importing toast to enable status notification
 import toast, { Toaster } from "react-hot-toast";
 import ButtonLoader from "../Loader/ButtonLoader";
 import { Helmet } from "react-helmet";
+import { AppContext } from "../GeneralComponents/ContextApi";
 
 // Note: THE DOCUMENTATION IN THIS FILE IS ALSO APPLICABLE TO THE TutorSignInForm Component... so please read it properly, so you will not stress me 😊
 
+// BECAUSE I DON NOT CURRENTLY KNOW BACKEND TECHNOLOGY YET, I WILL BE MAKING THIS STUDENT DETAILS STATE IN MY CONTEXT API... SO I CAN USE THE INFORMATION TO MAKE DASHBOARD SETTINGS
+
+
 // destructuring the expected values of the form using a usestate called StudentDetails
 const StudentSignUpFormPage = () => {
-  const [studentDetails, setStudentDetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    experiencelevel: "",
-    password: "",
-  });
+
+  const {studentDetails, setStudentDetails} = useContext(AppContext)
+
+  // const [studentDetails, setStudentDetails] = useState({
+  //   firstname: "",
+  //   lastname: "",
+  //   email: "",
+  //   experiencelevel: "",
+  //   password: "",
+  // });
 
   // Here i am destructing a variable formSubmitted, to know when the form has been submitted, for the purpose of navigation... if the form has been succesfully submitted, the user should be navigated tothe student dashboard
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -28,7 +35,7 @@ const StudentSignUpFormPage = () => {
   useEffect(() => {
     if (formSubmitted) {
       setTimeout(() => {
-        navigate("/studentDashboard");
+        navigate("/studentdashboard");
       }, 2000);
     }
   }, [formSubmitted, navigate]);
