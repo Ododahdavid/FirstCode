@@ -625,3 +625,48 @@ form button:disabled{
 .toast-error{
   background-color: rgb(240, 139, 156);
 }
+
+/* Tutor DASHboard design */
+.TutorDashBoard-Main-section{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: yellow; */
+}
+.Tutor-DashBoard-SideBar{
+  width: 20%;
+  height: 100%;
+  background-color: white;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  border-right: solid 2px black;
+  border-top: 2px solid #000;
+}
+.Tutor-DashBoard-SideBar div{
+  width: 90%;
+  height: 60px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 0px;
+}
+
+.Tutor-DashBoard-SideBar div img{
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  padding: 10px;
+}
+.Tutor-Dynamic-sections-container{
+  width: 80%;
+  height: 100%;
+
+}

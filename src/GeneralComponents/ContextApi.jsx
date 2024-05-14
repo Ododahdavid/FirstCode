@@ -26,13 +26,18 @@ export const AppcontextProvider = (props) => {
         email: "",
         experiencelevel: "",
         password: "",
-      });
+    });
+
+    const [TutorDashBoardIconClick, setTutorDashBoardIconClick] = useState(true)
+    const [TutorCoursesIconClick, setTutorCoursesIconClick] = useState(false)
+    const [TutorCreateCourseIconClick, setTutorCreateCourseIconClick] = useState(false)
+    const [TutorNotificationIconClick, setTutorNotificationIconClick] = useState(false)
 
 
 
     //   Here, is where i place the variables i want to make accessible to all components in my Project
     const contextValue = {
-        studentDetails, setStudentDetails, TutorDetails, setTutorDetails
+        studentDetails, setStudentDetails, TutorDetails, setTutorDetails,TutorDashBoardIconClick, setTutorDashBoardIconClick, TutorCoursesIconClick, setTutorCoursesIconClick, TutorCreateCourseIconClick, setTutorCreateCourseIconClick, TutorNotificationIconClick, setTutorNotificationIconClick
 
     };
 

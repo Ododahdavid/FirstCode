@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import SideBar from "../Components/TutorDashBoardComponents/SideBar";
 
 const TutorDashboard = () => {
   return (
@@ -8,7 +9,20 @@ const TutorDashboard = () => {
         <title>Tutor Dashboard</title>
       </Helmet>
 
-      <h1>Tutor's Dashboard</h1>
+      <h1>Tutor's Dashboard  NavBar</h1>
+
+      <div className={"TutorDashBoard-Main-section"}>
+        <SideBar/>
+
+        {/* CONTAINER FOR DYNAMIC RENDERING OF SECTIONS */}
+
+        <div className={"Tutor-Dynamic-sections-container"}>
+
+        </div>
+
+      </div>
+
+
     </>
   );
 };
