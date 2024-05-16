@@ -6,9 +6,7 @@ import { Helmet } from "react-helmet";
 import { AppContext } from "../GeneralComponents/ContextApi";
 
 const TutorSignUpFormPage = () => {
-
   // i want to make the details from this tutor form available to all components, so i will be moving the below commented code, to the context API page. and i will destructure it here
-
 
   // const [TutorDetails, setTutorDetails] = useState({
   //   firstname: "",
@@ -19,8 +17,8 @@ const TutorSignUpFormPage = () => {
   // });
 
   // Destructuring the tutors form state from the context API page
-  const {TutorDetails, setTutorDetails} = useContext(AppContext)
- 
+  const { TutorDetails, setTutorDetails, Tutorusers, setTutorUsers } = useContext(AppContext);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [SubmitClick, setSubmitClick] = useState(false);
   const navigate = useNavigate();
@@ -46,14 +44,34 @@ const TutorSignUpFormPage = () => {
     TutorSignUpFormButton.current.disabled = true;
   };
 
+  const experienceLevelCheck = () => {
+    
+    const { experiencelevel } = TutorDetails;
+    if (experiencelevel === "beginner") {
+      toast.error("Beginner Can't be a Tutor", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
+      return false;
+    }
+    else{
+      return true;
+    }
+  };
+
+
+    // submit process
   const TutorFormSubmitProcess = (event) => {
     event.preventDefault();
+ 
 
     if (
       TutorDetailsValidation() &&
       TutorNameValidation() &&
       TutorEmailValidation() &&
-      PasswordStrengthValidator()
+      PasswordStrengthValidator() &&
+      experienceLevelCheck()
     ) {
       setTimeout(() => {
         setSubmitClick(false);
@@ -62,16 +80,16 @@ const TutorSignUpFormPage = () => {
             background: "rgb(144, 234, 96)",
           },
         });
-        setTutorDetails({
-          firstname: "",
-          lastname: "",
-          email: "",
-          experiencelevel: "",
-          password: "",
-        });
+        
+       
+        // Pushing User details to Tutorusers Array as an object, to make an array of objects
+        setTutorUsers([...Tutorusers, TutorDetails])
+        // Store TutorDetails in local storage, so i can fetch it for dashboard display
+        localStorage.setItem("TutorDetails :", JSON.stringify(TutorDetails));        
         setFormSubmitted(true);
         setPasswordStrength("");
         console.table(TutorDetails);
+       
       }, 2000);
     } else if (!PasswordStrengthValidator()) {
       // toast styling
@@ -85,7 +103,9 @@ const TutorSignUpFormPage = () => {
         setSubmitClick(false); // Re-enable the button
         TutorSignUpFormButton.current.disabled = false; // Re-enable the button
       }, 1000);
-    } else {
+    }
+
+    else {
       setTimeout(() => {
         setSubmitClick(false);
       }, 2000);
@@ -93,6 +113,7 @@ const TutorSignUpFormPage = () => {
     TutorSignUpFormButton.current.disabled = false;
   };
 
+  // Reference for form submit button
   const TutorSignUpFormButton = useRef(null);
 
   // Validation functions
@@ -327,6 +348,8 @@ const TutorSignUpFormPage = () => {
               >
                 {SubmitClick ? <ButtonLoader /> : "Submit"}
               </button>
+
+              
             </div>
           </form>
         </div>

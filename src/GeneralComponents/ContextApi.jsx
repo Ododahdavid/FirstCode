@@ -1,14 +1,23 @@
-//   Use contetnt is a react hook or tool that helps us to manage state globally, and access context in react from anywhere
-// First of all, you have to import React, and createContext from"react" as shown below
-// It is also used as an environmental variable... basiclally a global variable, for all components
-import React, { createContext, useState } from "react";
+
+import React, { createContext, useEffect, useState } from "react";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 // import propTypes from "prop-types"
 
 // This is a global variable set as a context api
 export const AppContext = createContext("here");
 
 export const AppcontextProvider = (props) => {
-    const { children } = props; //Destructure children from props
+
+
+    const [Tutorusers, setTutorUsers] = useState(()=> {
+        // Initializing Tutorusers state with data from local storage, if available
+        const savedUsers = localStorage.getItem("TutorUsers");
+        return savedUsers ? JSON.parse(savedUsers) : [];
+    });
+   
+   
+    const { children } = props; 
 
     // Here i am destructing the form details from the student sign in form, so it can be accessble for later
     const [studentDetails, setStudentDetails] = useState({
@@ -28,16 +37,173 @@ export const AppcontextProvider = (props) => {
         password: "",
     });
 
+
+        // Effect to update local storage whenever Tutorusers changes
+        useEffect(() => {
+            localStorage.setItem("TutorUsers", JSON.stringify(Tutorusers));
+        }, [Tutorusers]);
+
+    // State for Tutorusers
+
+    // Function to save users information in the LocalStorage
+    // const saveTutorUsersToLocalStorage = () => {
+    //     setTutorUsers([...Tutorusers, TutorDetails])
+    //     localStorage.setItem("TutorUsers", JSON.stringify(Tutorusers));
+    // };
+
+    // // Function to get users information in the LocalStorage
+    // const getTutorUsersFromLocalStorage = () => {
+    //     setTutorUsers(JSON.parse(localStorage.getItem("TutorUsers")));
+    // };
+    // getTutorUsersFromLocalStorage()
+    // Destucturing variables that will change values when the menus on the Tutor dashboard side bar is clicked
     const [TutorDashBoardIconClick, setTutorDashBoardIconClick] = useState(true)
     const [TutorCoursesIconClick, setTutorCoursesIconClick] = useState(false)
     const [TutorCreateCourseIconClick, setTutorCreateCourseIconClick] = useState(false)
     const [TutorNotificationIconClick, setTutorNotificationIconClick] = useState(false)
 
+    {/* npm install recharts  to install Charts*/ }
+
+
+
+    // Sample DATA for Tutor Dashboard
+    const data = [
+        {
+            course: 'React Basics',
+            completionRate: 85,
+            enrolledStudents: 200,
+            averageRating: 4.5,
+            completedAssignments: 180
+        },
+        {
+            course: 'Advanced React',
+            completionRate: 78,
+            enrolledStudents: 150,
+            averageRating: 4.3,
+            completedAssignments: 120
+        },
+        {
+            course: 'JavaScript Fundamentals',
+            completionRate: 92,
+            enrolledStudents: 300,
+            averageRating: 4.8,
+            completedAssignments: 280
+        },
+        {
+            course: 'Node.js Essentials',
+            completionRate: 70,
+            enrolledStudents: 130,
+            averageRating: 4.1,
+            completedAssignments: 90
+        },
+        {
+            course: 'CSS Mastery',
+            completionRate: 88,
+            enrolledStudents: 220,
+            averageRating: 4.6,
+            completedAssignments: 200
+        },
+        {
+            course: 'HTML & Web Design',
+            completionRate: 95,
+            enrolledStudents: 250,
+            averageRating: 4.9,
+            completedAssignments: 240
+        },
+        {
+            course: 'TypeScript in Depth',
+            completionRate: 80,
+            enrolledStudents: 180,
+            averageRating: 4.4,
+            completedAssignments: 150
+        },
+        {
+            course: 'GraphQL Basics',
+            completionRate: 75,
+            enrolledStudents: 160,
+            averageRating: 4.2,
+            completedAssignments: 130
+        },
+        {
+            course: 'Docker & Kubernetes',
+            completionRate: 65,
+            enrolledStudents: 100,
+            averageRating: 3.9,
+            completedAssignments: 70
+        },
+        {
+            course: 'Python for Data Science',
+            completionRate: 90,
+            enrolledStudents: 270,
+            averageRating: 4.7,
+            completedAssignments: 260
+        },
+        {
+            course: 'Machine Learning with Python',
+            completionRate: 82,
+            enrolledStudents: 210,
+            averageRating: 4.5,
+            completedAssignments: 190
+        },
+        {
+            course: 'DevOps Fundamentals',
+            completionRate: 72,
+            enrolledStudents: 140,
+            averageRating: 4.0,
+            completedAssignments: 100
+        },
+        {
+            course: 'Angular Essentials',
+            completionRate: 77,
+            enrolledStudents: 175,
+            averageRating: 4.3,
+            completedAssignments: 140
+        },
+        {
+            course: 'Vue.js for Beginners',
+            completionRate: 85,
+            enrolledStudents: 190,
+            averageRating: 4.6,
+            completedAssignments: 170
+        },
+    ];
+
+    const TutorDashboardGraph = (
+        <ResponsiveContainer width="70%" height={"100%"} style={{backgroundColor:"white"}} >
+            <AreaChart data={data}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="course" />
+                <YAxis domain={[0, 100]} />
+                <Tooltip 
+                    content={({ payload }) => {
+                        if (payload && payload.length) {
+                            const { course, completionRate, enrolledStudents, averageRating, completedAssignments } = payload[0].payload;
+                            return (
+                                <div className="custom-tooltip">
+                                    <p>{`Course: ${course}`}</p>
+                                    <p>{`Completion Rate: ${completionRate}%`}</p>
+                                 
+                                    <p>{`Average Rating: ${averageRating}`}</p>
+                                    
+                                </div>
+                            );
+                        }
+                        return null;
+                    }}
+                />
+                <Area type="monotone" dataKey="completionRate" stroke="#8884d8" fill="rgb(255, 153, 0)" />
+                <Area type="monotone" dataKey="enrolledStudents" stroke="#8884d8" fill="blue" />
+            </AreaChart>
+        </ResponsiveContainer>
+    );
+
+    
+
 
 
     //   Here, is where i place the variables i want to make accessible to all components in my Project
     const contextValue = {
-        studentDetails, setStudentDetails, TutorDetails, setTutorDetails,TutorDashBoardIconClick, setTutorDashBoardIconClick, TutorCoursesIconClick, setTutorCoursesIconClick, TutorCreateCourseIconClick, setTutorCreateCourseIconClick, TutorNotificationIconClick, setTutorNotificationIconClick
+        studentDetails, setStudentDetails, TutorDetails, setTutorDetails,TutorDashBoardIconClick, setTutorDashBoardIconClick, TutorCoursesIconClick, setTutorCoursesIconClick, TutorCreateCourseIconClick, setTutorCreateCourseIconClick, TutorNotificationIconClick, setTutorNotificationIconClick, TutorDashboardGraph, Tutorusers, setTutorUsers
 
     };
 
