@@ -35,6 +35,7 @@ export const AppcontextProvider = (props) => {
         email: "",
         experiencelevel: "",
         password: "",
+        courses: []
     });
 
     const [LoginDetails, setLoginDetails] = useState({

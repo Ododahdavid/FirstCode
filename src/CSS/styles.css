@@ -678,6 +678,7 @@ form button:disabled{
   padding: 20px;
   overflow: auto;
   background-color: rgb(218, 214, 214);
+  position: relative;
 }
 .Tutor-Dashboard-Banner{
   width: 100%;
@@ -769,6 +770,8 @@ form button:disabled{
   padding: 10px 30px;
   position: sticky;
   top: 0px;
+  z-index: 5;
+  background-color: #e5e5f7;
 }
 .TutorDashBoardNav .logo{
   display: flex;
@@ -857,8 +860,226 @@ form button:disabled{
   gap: 10px;
   cursor: pointer;
 }
+.UserMenu-LogOut:hover{
+  background-color: #e5e5f7
+}
 .UserMenu-LogOut img{
   width: 30px;
   width: 30px;
   object-fit: cover;
+}
+
+/* Tutor Create Course section Styling */
+.Create-course-section{
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Create-course-Button{
+  width: 400px;
+  height: 200px;
+  outline: dashed 2px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+}
+.Create-course-Button:hover{
+  background-color: #fff;
+  outline: blue dashed 2px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+/* Dialog styling */
+.CourseCreationDialog{
+  width: 500px;
+  height: fit-content;
+  padding: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: fixed;
+  z-index: 10 !important;
+}
+.CourseCreationDialog::backdrop{
+  backdrop-filter: blur(10px);
+  z-index: 0;
+}
+/* cancel button in the dialog */
+.CloseCourseCreationDialog{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+}
+.CourseCreationDialog h1{
+  width: 100%;
+  height: fit-content;
+  color: rgb(255, 153, 0);
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.CourseCreationDialog form{
+  width: 100%;
+  height: fit-content;
+}
+.CourseCreationDialog form label{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: blue;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.CourseCreationDialog form input, textarea{
+  width: 300px;
+  padding: 5px;
+}
+.CourseCreationButtonContainer{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.CourseCreationButtonContainer button{
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+.CourseCreationButtonContainer button:disabled{
+  background-color: hsl(240, 63%, 73%);
+  color: #fff;
+  cursor: no-drop;
+  /* display: none; */
+}
+
+
+
+
+/* COPIED CODE FOR CADE HOVER EFFECT */
+/* Container for the entire component */
+.tutors-courses-container {
+  padding: 16px;
+}
+
+/* Title of the settings section */
+.tutors-courses-title {
+  font-size: 30px; /* text-xl in Tailwind */
+  font-weight: 600; /* font-semibold in Tailwind */
+  margin-bottom: 16px; /* mb-4 in Tailwind */
+}
+
+/* Flex container for the cards */
+.tutors-courses-flex {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to the next line if necessary */
+  gap: 16px; /* gap-4 in Tailwind */
+}
+
+/* Card container */
+.course-card {
+  flex: 1 1 calc(50% - 16px); /* Take 50% of the width minus the gap for small screens */
+  max-width: calc(50% - 16px);
+  min-width: 200px;
+  padding: 16px; /* p-4 in Tailwind */
+  border-radius: 8px; /* rounded in Tailwind */
+  border: 1px solid #cbd5e1; /* border-slate-300 in Tailwind */
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff; /* bg-white in Tailwind */
+  transition: transform 0.3s ease, color 0.3s ease; /* group-hover transition */
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  flex-direction: column;
+  
+
+  /* Hover effect for the gradient background */
+  &:hover .course-card-bg {
+    transform: translateY(0%);
+  }
+
+  &:hover .course-card-title,
+  &:hover .course-card-author {
+    color: rgb(255, 153, 0);
+  }
+ 
+  &:hover .course-card-subtitle {
+    color: white;
+  }
+
+
+  /* Media query for larger screens */
+  @media (min-width: 1024px) {
+    flex: 1 1 calc(25% - 16px); /* Take 25% of the width minus the gap for large screens */
+    max-width: calc(25% - 16px);
+  }
+}
+
+/* Gradient background for the card */
+.course-card-bg {
+  position: absolute;
+  inset: 0;
+  background-color: blue;
+  /* background: linear-gradient(to right, #7c3aed, #4f46e5); */
+   /* from-violet-600 to-indigo-600 in Tailwind */
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+/* Card title */
+.course-card-title {
+  font-weight: 500; /* font-medium in Tailwind */
+  font-size: 25px; /* text-lg in Tailwind */
+  color: #0f172a; /* text-slate-950 in Tailwind */
+  transition: color 0.3s ease;
+  z-index: 1;
+  position: relative;
+}
+
+/* Card subtitle */
+.course-card-subtitle {
+  color: #000000; /* text-slate-400 in Tailwind */
+  transition: color 0.3s ease;
+  z-index: 1;
+  position: relative;
+  
+  display: -webkit-box;       /* Fallback for webkit browsers */
+  -webkit-line-clamp: 3;      /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+}
+
+/* Card author */
+.course-card-author {
+  color: #94a3b8; /* text-slate-400 in Tailwind */
+  transition: color 0.3s ease;
+  z-index: 1;
+  position: relative;
 }
