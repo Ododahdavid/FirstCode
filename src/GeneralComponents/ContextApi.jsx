@@ -10,14 +10,14 @@ export const AppContext = createContext("here");
 export const AppcontextProvider = (props) => {
 
 
-    const [Tutorusers, setTutorUsers] = useState(()=> {
+    const [Tutorusers, setTutorUsers] = useState(() => {
         // Initializing Tutorusers state with data from local storage, if available
         const savedUsers = localStorage.getItem("TutorUsers");
         return savedUsers ? JSON.parse(savedUsers) : [];
     });
-   
-   
-    const { children } = props; 
+
+
+    const { children } = props;
 
     // Here i am destructing the form details from the student sign in form, so it can be accessble for later
     const [studentDetails, setStudentDetails] = useState({
@@ -37,11 +37,17 @@ export const AppcontextProvider = (props) => {
         password: "",
     });
 
+    const [LoginDetails, setLoginDetails] = useState({
+        email: "",
+        password: "",
+        role: "",
+    });
 
-        // Effect to update local storage whenever Tutorusers changes
-        useEffect(() => {
-            localStorage.setItem("TutorUsers", JSON.stringify(Tutorusers));
-        }, [Tutorusers]);
+
+    // Effect to update local storage whenever Tutorusers changes
+    useEffect(() => {
+        localStorage.setItem("TutorUsers", JSON.stringify(Tutorusers));
+    }, [Tutorusers]);
 
     // State for Tutorusers
 
@@ -169,12 +175,12 @@ export const AppcontextProvider = (props) => {
     ];
 
     const TutorDashboardGraph = (
-        <ResponsiveContainer width="70%" height={"100%"} style={{backgroundColor:"white"}} >
+        <ResponsiveContainer width="70%" height={"100%"} style={{ backgroundColor: "white" }} >
             <AreaChart data={data}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="course" />
                 <YAxis domain={[0, 100]} />
-                <Tooltip 
+                <Tooltip
                     content={({ payload }) => {
                         if (payload && payload.length) {
                             const { course, completionRate, enrolledStudents, averageRating, completedAssignments } = payload[0].payload;
@@ -182,9 +188,9 @@ export const AppcontextProvider = (props) => {
                                 <div className="custom-tooltip">
                                     <p>{`Course: ${course}`}</p>
                                     <p>{`Completion Rate: ${completionRate}%`}</p>
-                                 
+
                                     <p>{`Average Rating: ${averageRating}`}</p>
-                                    
+
                                 </div>
                             );
                         }
@@ -197,14 +203,13 @@ export const AppcontextProvider = (props) => {
         </ResponsiveContainer>
     );
 
-    
+
 
 
 
     //   Here, is where i place the variables i want to make accessible to all components in my Project
     const contextValue = {
-        studentDetails, setStudentDetails, TutorDetails, setTutorDetails,TutorDashBoardIconClick, setTutorDashBoardIconClick, TutorCoursesIconClick, setTutorCoursesIconClick, TutorCreateCourseIconClick, setTutorCreateCourseIconClick, TutorNotificationIconClick, setTutorNotificationIconClick, TutorDashboardGraph, Tutorusers, setTutorUsers
-
+        studentDetails, setStudentDetails, TutorDetails, setTutorDetails, TutorDashBoardIconClick, setTutorDashBoardIconClick, TutorCoursesIconClick, setTutorCoursesIconClick, TutorCreateCourseIconClick, setTutorCreateCourseIconClick, TutorNotificationIconClick, setTutorNotificationIconClick, TutorDashboardGraph, Tutorusers, setTutorUsers, LoginDetails, setLoginDetails
     };
 
     return (

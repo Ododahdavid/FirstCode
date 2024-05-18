@@ -14,6 +14,7 @@ const StudentDashboard = React.lazy(() => import("./Pages/StudentDashboard"))
 const TutorDashboard = React.lazy(() => import("./Pages/TutorDashboard"))
 const SignUpQuestionPage = React.lazy(() => import("./Pages/SignUpQuestionPage"))
 const StudentSignUpFormPage = React.lazy(() => import("./Pages/StudentSignUpFormPage"))
+const LoginPage = React.lazy(() => import ("./Pages/LoginPage"))
 
 // importing my context API
 
@@ -30,6 +31,7 @@ function App() {
               <Route path="/signupquestionpage" element={<SignUpQuestionPage />} />
               <Route path="/studentsignupformpage" element={<StudentSignUpFormPage />} />
               <Route path="/tutorsignupformpage" element={<TutorSignUpFormPage />} />
+              <Route path="/loginformpage" element={<LoginPage />} />
               <Route path="/*" element={<HomePage />} />
             </Routes>
             <Footer />

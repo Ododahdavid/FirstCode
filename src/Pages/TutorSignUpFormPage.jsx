@@ -45,7 +45,7 @@ const TutorSignUpFormPage = () => {
   };
 
   const experienceLevelCheck = () => {
-    
+
     const { experiencelevel } = TutorDetails;
     if (experiencelevel === "beginner") {
       toast.error("Beginner Can't be a Tutor", {
@@ -55,23 +55,46 @@ const TutorSignUpFormPage = () => {
       });
       return false;
     }
-    else{
+    else {
       return true;
     }
   };
 
 
-    // submit process
+  // Function to check if the user exists in the user record
+  const UserExistCheck = () => {
+    const { email } = TutorDetails;
+    // Retrieve stored users from local storage
+    const storedTutorUsers = JSON.parse(localStorage.getItem("TutorUsers")) || [];
+    // Using .some() to check if the user email already exists
+    const userExists = storedTutorUsers.some(user => user.email === email);
+
+    if (userExists) {
+      toast.error("User Already Exists", {
+        style: {
+          background: "rgb(240, 139, 156)",
+        },
+      });
+      return false;
+    }
+    else {
+      return true;
+    }
+
+  }
+
+  // submit process
   const TutorFormSubmitProcess = (event) => {
     event.preventDefault();
- 
+
 
     if (
       TutorDetailsValidation() &&
       TutorNameValidation() &&
       TutorEmailValidation() &&
       PasswordStrengthValidator() &&
-      experienceLevelCheck()
+      experienceLevelCheck() &&
+      UserExistCheck()
     ) {
       setTimeout(() => {
         setSubmitClick(false);
@@ -80,16 +103,16 @@ const TutorSignUpFormPage = () => {
             background: "rgb(144, 234, 96)",
           },
         });
-        
-       
+
+
         // Pushing User details to Tutorusers Array as an object, to make an array of objects
         setTutorUsers([...Tutorusers, TutorDetails])
         // Store TutorDetails in local storage, so i can fetch it for dashboard display
-        localStorage.setItem("TutorDetails :", JSON.stringify(TutorDetails));        
+        localStorage.setItem("TutorDetails :", JSON.stringify(TutorDetails));
         setFormSubmitted(true);
         setPasswordStrength("");
         console.table(TutorDetails);
-       
+
       }, 2000);
     } else if (!PasswordStrengthValidator()) {
       // toast styling
@@ -295,9 +318,9 @@ const TutorSignUpFormPage = () => {
                   style={{
                     backgroundColor:
                       passwordStrength === "Too Weak" ||
-                      passwordStrength === "Weak" ||
-                      passwordStrength === "Good" ||
-                      passwordStrength === "Strong"
+                        passwordStrength === "Weak" ||
+                        passwordStrength === "Good" ||
+                        passwordStrength === "Strong"
                         ? "red"
                         : "transparent",
                   }}
@@ -308,8 +331,8 @@ const TutorSignUpFormPage = () => {
                   style={{
                     backgroundColor:
                       passwordStrength === "Weak" ||
-                      passwordStrength === "Good" ||
-                      passwordStrength === "Strong"
+                        passwordStrength === "Good" ||
+                        passwordStrength === "Strong"
                         ? "red"
                         : "transparent",
                   }}
@@ -320,7 +343,7 @@ const TutorSignUpFormPage = () => {
                   style={{
                     backgroundColor:
                       passwordStrength === "Good" ||
-                      passwordStrength === "Strong"
+                        passwordStrength === "Strong"
                         ? "orange"
                         : "transparent",
                   }}
@@ -349,7 +372,7 @@ const TutorSignUpFormPage = () => {
                 {SubmitClick ? <ButtonLoader /> : "Submit"}
               </button>
 
-              
+
             </div>
           </form>
         </div>

@@ -8,6 +8,7 @@ import {
   TutorsInbox,
 } from "../Components/TutorDashBoardComponents/DynamicSectionRenderingComponents";
 import { AppContext } from "../GeneralComponents/ContextApi";
+import  TutorDashBoardNavBar from "../Components/TutorDashBoardComponents/TutorDashBoardNavBar"
 
 const TutorDashboard = () => {
   const {
@@ -27,7 +28,7 @@ const TutorDashboard = () => {
         <title>Tutor Dashboard</title>
       </Helmet>
 
-      <h1>Tutor's Dashboard NavBar</h1>
+      <TutorDashBoardNavBar/>
 
       <div className={"TutorDashBoard-Main-section"}>
         <SideBar />
